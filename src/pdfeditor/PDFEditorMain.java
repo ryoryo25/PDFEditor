@@ -1,17 +1,45 @@
 package pdfeditor;
 
-import java.io.File;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class PDFEditor {
+import pdfeditor.merge.Merge;
+import pdfeditor.rotate.Rotate;
+
+public class PDFEditorMain extends JFrame {
+
+	public PDFEditorMain() {
+		this.setBackground(Color.GRAY);
+		this.setTitle("PDF Editor");
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int w = screenSize.width;
+		int h = screenSize.height;
+		this.setLocation(w / 7, h / 5);
+
+		JPanel menu = new JPanel();
+		menu.setLayout(new GridLayout(0, 1, 5, 5));
+		menu.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		OperationButton rotateButton = new OperationButton("Rotate", e -> new Rotate(this));
+		OperationButton mergeButton = new OperationButton("Merge", e -> new Merge(this));
+		menu.add(rotateButton);
+		menu.add(mergeButton);
+
+		this.add(menu);
+		this.pack();
+		this.setVisible(true);
+	}
 
 	public static void main(String[] args) throws Exception {
-		PDDocument document = PDDocument.load(new File("./input.pdf"));
-
-		document.getPages().forEach(p -> p.setRotation(90));
-
-		document.save(new File("./output.pdf"));
-		document.close();
+		new PDFEditorMain();
 	}
 }

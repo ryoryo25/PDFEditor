@@ -9,7 +9,7 @@ public class OperationButton extends JButton {
 
 	public OperationButton(String title, ActionListener action) {
 		super(title);
-		this.setPreferredSize(new Dimension(220, 30));
+		this.setPreferredSize(new Dimension(250, 30));
 		this.addActionListener(action);
 	}
 }

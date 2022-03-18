@@ -14,9 +14,11 @@ import pdfeditor.rotate.Rotate;
 
 public class PDFEditorMain extends JFrame {
 
+	public static final String VERSION = "1.0";
+
 	public PDFEditorMain() {
 		this.setBackground(Color.GRAY);
-		this.setTitle("PDF Editor");
+		this.setTitle("PDF Editor v" + VERSION);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

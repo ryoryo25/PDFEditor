@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import pdfeditor.delete.Delete;
 import pdfeditor.merge.Merge;
 import pdfeditor.rotate.Rotate;
 
@@ -33,8 +34,10 @@ public class PDFEditorMain extends JFrame {
 
 		OperationButton rotateButton = new OperationButton("Rotate", e -> new Rotate(this));
 		OperationButton mergeButton = new OperationButton("Merge", e -> new Merge(this));
+		OperationButton deleteButton = new OperationButton("Delete", e -> new Delete(this));
 		menu.add(rotateButton);
 		menu.add(mergeButton);
+		menu.add(deleteButton);
 
 		this.add(menu);
 		this.pack();

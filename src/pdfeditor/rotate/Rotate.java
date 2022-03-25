@@ -9,6 +9,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,7 +36,7 @@ public class Rotate extends JDialog implements ActionListener, ChangeListener, F
 	private static final String[] ROTATION_NAMES = { "90 deg. CW", "180 deg. CW", "90 deg. CCW" };
 	private static final int[] ROTATION_ANGLES = { 90, 180, 270 };
 
-	private static final String CUSTOM_PAGE_PLACEHOLDER = "Ex: 1-3 8 11-13 (Space separated)";
+	private static final String CUSTOM_PAGE_PLACEHOLDER = "Ex: 1-3, 8, 11-13 (',' separated)";
 
 	private JLabel labelSelectedFile;
 	private JButton selectButton;
@@ -274,12 +275,15 @@ public class Rotate extends JDialog implements ActionListener, ChangeListener, F
 	private static Set<Integer> parseCustomPages(String input) {
 		Set<Integer> pages = new HashSet<>();
 
-		if (!input.matches("((([0-9]+)-([0-9]+))|([0-9]+)| )+")) {
+		if (!input.matches("((([0-9]+)-([0-9]+))|([0-9]+)|( *, *))+")) {
 			System.out.println("Not matched pattern!");
 			return pages;
 		}
 
-		String[] splitted = input.split(" ");
+		input = input.replace(" ", "");
+		System.out.println(input);
+		String[] splitted = input.split(",");
+		System.out.println(Arrays.toString(splitted));
 
 		for (String pp : splitted) {
 			if (pp.matches("([0-9]+)-([0-9]+)")) {
